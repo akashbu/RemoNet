@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
+        <link  rel="stylesheet" type="text/css" href="../../css/style.css">
+    </head>
+    <body onload="check('<%= data.roles%>','<%= data.admin%>')">
+        <div class="mainFrame">
+            <div class="up">
+                <div class="IMG">
+                </div>
+            </div>
+            <div class="topnav">
+                <a href="../../logout">Logout</a>
+                <a href="../../contact" style="align-content: center">Contact</a>
+                <a href="./userManagement">User Management</a>
+                <a href="../../modules">Home</a>
+            </div>
+            <h2 class="heading1">User Details</h2>
+            <div class="DetailOutter">
+                <div class="details">
+                    <h3>  First Name : <%= data.fname%> </h3>
+                    <h3>  Last Name  : <%= data.lname%></h3>
+                    <h3>  Email      : <%= data.email %></h3>
+                    <h3>  Contact    : <%= data.contact%></h3>
+                <input type="checkbox" id="admin" /><h3 style="display: inline">admin</h3><br>                    
+                <h3 style="display: inline">  Roles      :</h3><form>
+                        <div class="multiselect">
+                          <div class="selectBox" onclick="showCheckboxes()">
+                            <select>
+                              <option>SelectSelect</option>
+                            </select>
+                            <div class="overSelect"></div>
+                          </div>
+                          <div id="checkboxes">
+                            <label for="one">
+                              <input type="checkbox" id="user" />user</label>
+                            <label for="two">
+                              <input type="checkbox" id="employee" />employee</label>
+                          </div>
+                        </div>
+                      </form>
+                    <%if(!data.approve && !data.reject){%>
+                        <button class="btns" onclick="Approve('<%=data.email%>')">Approve</button>
+                        <button class="btns" onclick="Reject('<%=data.email%>')">Reject</button>   
+                    <%}%>
+                    <%if(data.approve && !data.reject){%>
+                        <button class="btns" onclick="Deactivate('<%=data.email%>')">Deactivate</button>
+                    <%}%>
+                    <%if(!data.approve && data.reject){%>
+                        <button class="btns" onclick="Approve('<%=data.email%>')">Approve</button>   
+                    <%}%>
+                    <%if(data.approve && data.reject){%>
+                        <button class="btns" onclick="Activate('<%=data.email%>')">Activate</button>
+                    <%}%>
+                    <button class="btns" onclick= "Back()">Back</button>
+                </div>
+            </div>
+            <%include footer.ejs%>
+        </div>
+        <script>
+            function check(temp ,adm){
+                var admin   = adm
+                if(admin == 'true'){
+                    document.getElementById("admin").checked =true
+                }
+                var roles = temp.split(/#/)
+                for(i in roles){
+                    if(roles[i] === 'user'){
+                        document.getElementById("user").checked =true
+                    }
+                    if(roles[i] === 'employee'){
+                        document.getElementById("employee").checked =true
+                    }
+
+                }
+            } 
+            function Approve(em){
+                var selected = []
+                var i=0
+                var admin
+                if(document.getElementById('admin').checked == true){
+                    admin = true
+                }
+                else{
+                    admin = false
+                }  
+                if(document.getElementById('user').checked == true){
+                    selected[i] = 'employee'
+                    i++                    
+                }
+                if(document.getElementById('employee').checked == true){
+                    selected[i] = 'employee'
+                    i++                    
+                }
+                var email = em
+                window.location.href="./Approve?email="+email+"&roles="+selected+"&admin="+admin
+            }
+            function Reject(em){
+                var email = em
+                window.location.href="./Reject?email="+email
+            }
+            function Activate(em){
+                var selected = []
+                var i=0
+                var admin
+                if(document.getElementById('admin').checked == true){
+                    admin = true
+                }
+                else{
+                    admin = false
+                }  
+                if(document.getElementById('user').checked == true){
+                    selected[i] = 'user'
+                    i++                    
+                }
+                if(document.getElementById('employee').checked == true){
+                    selected[i] = 'employee'
+                    i++                    
+                }
+                var email = em
+                window.location.href="./Activate?email="+email+"&roles="+selected+"&admin="+admin
+            }
+            function Deactivate(em){
+                var email = em
+                window.location.href="./Deactivate?email="+email
+            }
+            function Back(){
+                window.location.href="/admin/UserManagement"
+            }
+            var expanded = false;
+
+            function showCheckboxes() {
+            var checkboxes = document.getElementById("checkboxes");
+            if (!expanded) {
+                checkboxes.style.display = "block";
+                expanded = true;
+            } else {
+                checkboxes.style.display = "none";
+                expanded = false;
+            }
+            }
+        </script>
+    </body>
+</html>

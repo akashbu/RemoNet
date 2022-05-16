@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+
+  <HEAD>      
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
+    <link  rel="stylesheet" type="text/css" href="../../css/style.css">
+  </HEAD>
+  <body >
+    <div class="mainFrame">
+      <div class="up">
+        <div class="IMG">
+        </div>
+      </div>
+      <div class="topnav">
+        <a href="../../logout">Logout</a>
+        <a href="../../contact" style="align-content: center">Contact</a>
+        <a class="active" href="userManagement">User Management</a>
+        <a  href="../../modules">Home</a>          
+      </div>
+      <h2 align="center">Users Status</h2>
+      <div class="tableOutter">
+      <div class="Filter">
+        <div class="dropdown">
+          <button class="dropbtn">Filter</button>
+          <div class="dropdown-content">
+            <a href="#" onclick="Filter('All')">All</a>
+            <a href="#" onclick="Filter('Pending')">Pending</a>
+            <a href="#" onclick="Filter('Active')">Active</a>
+            <a href="#" onclick="Filter('Inactive')">Inactive</a>
+          </div>
+        </div>
+      </div>
+      <table align="center" cellspacing="20" id="data">
+        <tr class="columns">
+          <th>Name</th>
+          <th>Email</th>
+          <th>Contact</th>
+          <th>Roles</th>
+          <th>Status</th>
+          <% for(var i in userData.fname){%>
+            <% if(userData.approve[i] == false && userData.reject[i] == false){ %>
+        </tr>
+        <tr>
+          <td class="ralign"><a href="../admin/userDetails?email=<%=userData.email[i]%>"><%= userData.fname[i] %>&nbsp;<%= userData.lname[i] %></a></td>          <td class="ralign"><%= userData.email[i] %></td>
+          <td class="ralign"><%= userData.contact[i] %></td>
+          <td class="ralign"><%= userData.role[i]%></td>
+          <td class="ralign">Pending</td>
+        </tr>
+          <%}else if(userData.approve[i] == true && userData.reject[i] == false){ %>
+        </tr>
+        <tr>
+            <td class="ralign"><a href="../admin/userDetails?email=<%=userData.email[i]%>"><%= userData.fname[i] %>&nbsp;<%= userData.lname[i] %></a></td>
+          <td class="ralign"><%= userData.email[i] %></td>
+          <td class="ralign"><%= userData.contact[i] %></td>
+          <td class="ralign"><%= userData.role[i] %></td>
+          <td class="ralign">Active</td>
+        </tr>      
+          <%}else if(userData.approve[i] == true && userData.reject[i] == true){ %>    
+        </tr>      
+        <tr>     
+          <td class="ralign"><a href="../admin/userDetails?email=<%=userData.email[i]%>"><%= userData.fname[i] %>&nbsp;<%= userData.lname[i] %></a></td>
+          <td class="ralign"><%= userData.email[i] %></td>
+          <td class="ralign"><%= userData.contact[i] %></td>
+          <td class="ralign"><%= userData.role[i] %></td>
+          <td class="ralign">Inactive</td>
+        </tr>
+          <%}else if(userData.approve[i] == false && userData.reject[i] == true){%>
+          </tr>
+          <tr>
+            <td class="ralign"><a href="../admin/userDetails?email=<%=userData.email[i]%>"><%= userData.fname[i] %>&nbsp;<%= userData.lname[i] %></a></td>          <td class="ralign"><%= userData.email[i] %></td>
+            <td class="ralign"><%= userData.contact[i] %></td>
+            <td class="ralign"><%= userData.role[i]%></td>
+            <td class="ralign">Pending</td>
+          </tr>
+          <%}%>
+        <%}%>
+      </table>
+    </div>      
+    <script>
+        function Filter(input) {
+          var filter, table, tr, td, i, txtValue;
+          filter = input;
+          table = document.getElementById("data");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[4];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if(!(filter.localeCompare("All")))
+              {
+                tr[i].style.display ="";
+              }
+              else if (txtValue.indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } 
+              else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+    </script>
+    <%include footer.ejs%>
+    </div>
+  </body>
+</HTML>
+  

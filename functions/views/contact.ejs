@@ -1,0 +1,40 @@
+<html>
+  <head>
+      
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="../css/style.css" >
+    <title>about</title>
+
+  </head>
+  <body>
+    <div class="mainFrame">
+      <div class="up">
+        <div class="IMG">
+        </div>
+      </div>
+      <div class="topnav">
+        <%if(presents){%>
+          <a href="/logout">Logout</a>
+        <%}%>
+        <a class="active" href="../contact" style="align-content: center">Contact</a>
+        <%if(presents){%>
+          <%if(email == "remonet.shalaka@gmail.com" || admin == true){%>
+            <a href="../admin/userManagement">User Management</a>
+          <%}%>
+            <a href="../modules">Home</a>
+        <%}%>
+        <%if(!presents){%>
+          <a href="/">Login</a>
+        <%}%>
+      </div>
+      <h2 align="center">Contact</h2>
+      <div class="container">
+        <p align="center"> For any queries mail remonet.shalaka@gmail.com</p>
+        <p align="center">Address: Office No 2, Chinali Apts, Off Khilare Road, Above Hotel Sweekar, Erandvane</p>
+      </div>
+      <% include footer.ejs %>
+    </div> 
+  </body>
+</html>

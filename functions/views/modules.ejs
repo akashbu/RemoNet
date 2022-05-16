@@ -1,0 +1,30 @@
+<HTML>
+  <HEAD>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  </HEAD>
+  <body align= "center">
+    <div class="mainFrame">
+      <div class="up">
+        <div class="IMG">
+        </div>
+      </div>
+      <div class="topnav">
+        <a href="./logout">Logout</a>
+               <a href="contact" style="align-content: center">Contact</a>
+        <%if(presents == "remonet.shalaka@gmail.com" || admin ==true){%>
+          <a href="../admin/userManagement">User Management</a>
+        <%}%>
+        <a class="active" href="../modules">Home</a>
+      </div>
+      <div class="bns">
+        <button class="bn" type="button" onclick="location.href='/dataRetrieval/bms'">Building Management</button>
+        <button class="bn" type="button" onclick="location.href='/dataRetrieval/machineManagement'">Machine Management</button>
+        <button class="bn" type="button" onclick="location.href='/dataRetrieval/assetTracking'">Asset Tracking</button>
+      </div>
+      <% include footer.ejs %>
+    </div>        
+  </body>
+</HTML>
+    

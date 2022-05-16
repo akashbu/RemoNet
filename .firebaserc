@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "remonet-70172",
+    "staging": "remonet-f20c4"
+  }
+}

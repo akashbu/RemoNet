@@ -1,0 +1,61 @@
+<HTML>
+        <HEAD>
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">          
+          <link href="../../css/style.css" rel="stylesheet" type="text/css">
+        <style>
+          
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color:aquamarine;
+}
+        </style>
+          </HEAD>
+        
+          <body align="center" class="backendimg">
+              <div mainFrame>
+                    <div class="up">
+                            <div class="IMG">
+                            </div>
+                          </div>
+                          <div class="topnav">
+                            <a href="/logout">Logout</a>
+                                   <a href="/contact" style="align-content: center">Contact</a>
+                            <%if(presents == "remonet.shalaka@gmail.com" || admin ==true){%>
+                                <a href="../admin/userManagement">User Management</a>
+                            <%}%>
+                            <a href="../modules">Home</a>
+                        </div>
+          <form align="center" action="/dataRetrieval/assetMachine" class="form-container" method="post">
+        
+              <div>
+                <h1>Machine Configuration</h1>
+                <label for="Machine"><b>Machine :</b></label>
+                <input type="text" id="Machine" name="Machine" value="<%= data.machine %>"readonly>
+        
+                    <h2>Tool Temperature</h2>
+                    <label for="upperlimit"><b>Upper Limit</b>&nbsp;</label>
+                    <input type="number" placeholder="Enter Upper Limit" name="ToolTemperatureUpper" value="<%= data.tooltemp_upper%>" required>
+                    <br><label for="lowerlimit"><b>Lower Limit</b>&nbsp;</label>
+                    <input type="number" placeholder="Enter Lower Limit" name="ToolTemperatureLower" value="<%= data.tooltemp_lower%>" required>
+        
+                    
+        
+                    <h2>Vibration</h2>
+                    <label for="upperlimit"><b>Upper Limit</b>&nbsp;</label>
+                    <input type="number" placeholder="Enter Upper Limit" name="VibrationUpper" value="<%= data.vibration_upper%>" required>
+                
+                    <br><label for="lowerlimit"><b>Lower Limit</b>&nbsp;</label>
+                    <input type="number" placeholder="Enter Lower Limit" name="VibrationLower" value="<%= data.vibration_lower%>" required>        
+
+                    <br/><button class="btns" style="left:0%" type="submit" name="Save" class="btn">Save</button>
+                <button type="button" class="btns" style="left:0%" onclick="location.href='./machineManagement'">Close</button>
+                <button type="reset" class="btns" style="left:0%;" name="Remove" class="btn">Reset</button>
+              </div>
+          </form>
+          <% include footer.ejs %>
+        </div>
+          </body>
+          </HTML>
+        
